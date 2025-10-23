@@ -19,8 +19,8 @@
         display:grid; place-items:center;
         overflow:hidden;
         background: linear-gradient(135deg,var(--bg-1),var(--bg-2),var(--bg-3),var(--bg-4),var(--bg-5));
-        background-size: 200% 200%;
-        animation: bgShift 18s ease-in-out infinite;
+        background-size: 200% 200%; 
+        animation: bgShift 20s ease-in-out infinite;
       }
 
       @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
@@ -33,15 +33,21 @@
         padding:clamp(16px,4vw,28px) clamp(20px,6vw,40px);
         backdrop-filter: blur(8px) saturate(1.15);
         -webkit-backdrop-filter: blur(8px) saturate(1.15);
-        background: rgba(255,255,255,0.45);
+         background: rgba(255,255,255,0.45);  
         border:1px solid rgba(255,255,255,0.6);
         border-radius:24px;
-        box-shadow:0 10px 30px rgba(0,0,0,.15);
+        box-shadow:0 2px 50px rgb(255, 0, 68) ;
         max-width:min(92vw,720px);
+        animation: bgShift 8s ease-in-out infinite;
       }
-      .hello{font-size:clamp(18px,2.6vw,24px);letter-spacing:.5px;margin:0 0 .25em}
-      .name{font-weight:800; font-size:clamp(28px,6vw,44px); margin:.1em 0 .2em; line-height:1.15;}
-      .sub{font-size:clamp(16px,2.4vw,22px);opacity:.9;margin:.35em 0 0}
+
+     
+     
+      
+
+      .hello{font-size:clamp(18px,2.6vw,24px);letter-spacing:.5px;margin:0 0 .25em; color: #ff0000; }
+      .name{font-weight:800; font-size:clamp(28px,6vw,44px); margin:.1em 0 .2em; line-height:1.15;font-style: oblique;}
+      .sub{font-size:clamp(16px,2.4vw,22px);opacity:.9;margin:.35em 0 0;color: #ff0000;}
       .time{font-size:clamp(12px,2vw,16px);opacity:.7;margin-top:.75em}
 
       /* Floating hearts layer */
@@ -57,7 +63,7 @@
         transform: rotate(-45deg);
         animation: floatUp var(--duration) linear forwards;
         will-change: transform, opacity;
-        filter: drop-shadow(0 8px 6px rgba(0,0,0,.15));
+        filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.15));
       }
       /* Build heart shape using one square + 2 circles */
       .heart, .heart::before, .heart::after{ background: var(--color); }
@@ -68,11 +74,11 @@
       .heart::after{ left: calc(50%); top: 0; }
 
       @keyframes floatUp{
-        0%{ transform: translateY(0) translateX(0) rotate(-45deg) scale(1); opacity:.95; }
+        0%{ transform: translateY(0) translateX(0) rotate(-45deg) scale(1); opacity:1; }
         25%{ transform: translateY(-25svh) translateX(-6px) rotate(-45deg) scale(1.03); }
         50%{ transform: translateY(-50svh) translateX(6px) rotate(-45deg) scale(1.06); }
         75%{ transform: translateY(-75svh) translateX(-4px) rotate(-45deg) scale(1.08); }
-        100%{ transform: translateY(-105svh) translateX(2px) rotate(-45deg) scale(1.1); opacity:.05; }
+        100%{ transform: translateY(-105svh) translateX(2px) rotate(-45deg) scale(1.1); opacity:0.5; }
       }
 
       /* Respect users who prefer reduced motion */
@@ -83,17 +89,28 @@
 
       /* Small helper controls (optional) */
       .actions{margin-top:10px}
-      .btn{appearance:none; border:none; border-radius:999px; padding:.6em 1em; font-weight:600; cursor:pointer; backdrop-filter: blur(6px); background:rgba(255,255,255,.6); box-shadow:0 2px 10px rgba(0,0,0,.08)}
-      .btn:hover{background:rgba(255,255,255,.8)}
+      .btn{appearance:none;
+         border:none;
+          border-radius:999px;
+           padding:.6em 1em; font-weight:600;
+            cursor:pointer; backdrop-filter: blur(6px);
+             background:rgba(255,255,255,.6);
+              box-shadow:0 3px 20px rgb(0, 255, 68) ;
+             animation: bgShift 1s ease-in-out infinite;
+      }
+              .btn:hover{
+        background:rgba(255,255,255,.8)
+      }
     </style>
   </head>
   <body>
     <div class="hearts" aria-hidden="true" id="heartsLayer"></div>
 
     <main class="card" role="region" aria-label="Lời chào">
-      <p class="hello">HELLO 👋</p>
+      <p class="hello">HELLO</p>
       <h1 class="name" id="nameDisplay">Friend</h1>
-      <p class="sub">Bạn vào đây có việc gì không? 🫶</p>
+      <p class="sub">Bạn vào đây có việc gì không? 🫵</p>
+      <a href="https://m.me/vu.manh.ky.826841" id="linkfb" target="_blank">nếu có thì bấm vào đây</a>
       <p class="time" id="timeNow"></p>
       <div class="actions">
         <button class="btn" id="changeName">Đổi tên</button>
