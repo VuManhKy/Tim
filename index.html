@@ -2,148 +2,187 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <title>Tim❤️💕🫶</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tim ❤️💕🫶</title>
     <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-        background: linear-gradient(
-          135deg,
-          #ffe6f0,
-          rgb(251, 145, 145),
-          rgb(151, 151, 255),
-          rgb(255, 255, 133),
-          #ccf2ff
-        );
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-family: "Arial", sans-serif;
+      :root{
+        --bg-1:#ffe6f0;--bg-2:#ffb3c7;--bg-3:#b4b8ff;--bg-4:#fff59d;--bg-5:#ccf2ff;
+        --text:#111;
+      }
+      *{box-sizing:border-box}
+      html,body{height:100%;}
+      body{
+        margin:0;
+        min-height:100svh; /* better on mobile */
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+        color:var(--text);
+        display:grid; place-items:center;
+        overflow:hidden;
+        background: linear-gradient(135deg,var(--bg-1),var(--bg-2),var(--bg-3),var(--bg-4),var(--bg-5));
+        background-size: 200% 200%;
+        animation: bgShift 18s ease-in-out infinite;
       }
 
-      #nameDisplay {
-        position: absolute;
-        top: 40%;
-        text-align: center;
-        font-size: 2.5em;
-        color: #000000;
-        font-weight: bolder;
-        text-shadow: 2px 3px 5px rgb(255, 255, 255);
-        font-style: oblique;
+      @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+      /* Center card */
+      .card{
+        position:relative;
+        z-index: 2;
+        text-align:center;
+        padding:clamp(16px,4vw,28px) clamp(20px,6vw,40px);
+        backdrop-filter: blur(8px) saturate(1.15);
+        -webkit-backdrop-filter: blur(8px) saturate(1.15);
+        background: rgba(255,255,255,0.45);
+        border:1px solid rgba(255,255,255,0.6);
+        border-radius:24px;
+        box-shadow:0 10px 30px rgba(0,0,0,.15);
+        max-width:min(92vw,720px);
+      }
+      .hello{font-size:clamp(18px,2.6vw,24px);letter-spacing:.5px;margin:0 0 .25em}
+      .name{font-weight:800; font-size:clamp(28px,6vw,44px); margin:.1em 0 .2em; line-height:1.15;}
+      .sub{font-size:clamp(16px,2.4vw,22px);opacity:.9;margin:.35em 0 0}
+      .time{font-size:clamp(12px,2vw,16px);opacity:.7;margin-top:.75em}
+
+      /* Floating hearts layer */
+      .hearts{position:fixed; inset:0; overflow:hidden; z-index:1; pointer-events:none}
+      .heart{
+        --size: 14px;           /* default; overridden per-node */
+        --duration: 6s;         /* overridden per-node */
+        position:absolute;
+        bottom: -10svh;         /* start just below */
+        left: 50%;
+        width: var(--size);
+        height: var(--size);
+        transform: rotate(-45deg);
+        animation: floatUp var(--duration) linear forwards;
+        will-change: transform, opacity;
+        filter: drop-shadow(0 8px 6px rgba(0,0,0,.15));
+      }
+      /* Build heart shape using one square + 2 circles */
+      .heart, .heart::before, .heart::after{ background: var(--color); }
+      .heart::before, .heart::after{
+        content:""; position:absolute; width:var(--size); height:var(--size); border-radius:50%;
+      }
+      .heart::before{ top: calc(-50%); left: 0; }
+      .heart::after{ left: calc(50%); top: 0; }
+
+      @keyframes floatUp{
+        0%{ transform: translateY(0) translateX(0) rotate(-45deg) scale(1); opacity:.95; }
+        25%{ transform: translateY(-25svh) translateX(-6px) rotate(-45deg) scale(1.03); }
+        50%{ transform: translateY(-50svh) translateX(6px) rotate(-45deg) scale(1.06); }
+        75%{ transform: translateY(-75svh) translateX(-4px) rotate(-45deg) scale(1.08); }
+        100%{ transform: translateY(-105svh) translateX(2px) rotate(-45deg) scale(1.1); opacity:.05; }
       }
 
-      .heart {
-        position: absolute;
-        bottom: 150px;
-        width: 10px;
-        height: dvh;
-        border-radius: 50%;
-        background-color: red;
-        animation: floatUp linear forwards;
-        z-index: 100;
+      /* Respect users who prefer reduced motion */
+      @media (prefers-reduced-motion: reduce){
+        body{ animation:none }
+        .heart{ animation-duration: 0.001s }
       }
 
-      .heart::before,
-      .heart::after {
-        content: "";
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background-color: inherit;
-        border-radius: 50%;
-      }
-
-      .heart::before {
-        top: 100px;
-        left: 100px;
-      }
-
-      .heart::after {
-        left: 100px;
-        top: 100px;
-      }
-
-      @keyframes floatUp {
-        from {
-          transform: translateY(0);
-          opacity: 1;
-        }
-        to {
-          transform: translateY(-100vh);
-          opacity: 1;
-        }
-      }
+      /* Small helper controls (optional) */
+      .actions{margin-top:10px}
+      .btn{appearance:none; border:none; border-radius:999px; padding:.6em 1em; font-weight:600; cursor:pointer; backdrop-filter: blur(6px); background:rgba(255,255,255,.6); box-shadow:0 2px 10px rgba(0,0,0,.08)}
+      .btn:hover{background:rgba(255,255,255,.8)}
     </style>
   </head>
   <body>
-    <div id="nameDisplay"></div>
+    <div class="hearts" aria-hidden="true" id="heartsLayer"></div>
+
+    <main class="card" role="region" aria-label="Lời chào">
+      <p class="hello">HELLO 👋</p>
+      <h1 class="name" id="nameDisplay">Friend</h1>
+      <p class="sub">Bạn vào đây có việc gì không? 🫶</p>
+      <p class="time" id="timeNow"></p>
+      <div class="actions">
+        <button class="btn" id="changeName">Đổi tên</button>
+      </div>
+    </main>
 
     <script>
-      // Hỏi họ tên người dùng
-      const hoTen = prompt("Nhập HỌ TÊN của friend vào đây:");
+      // ==== CONFIG ====
+      const COLORS = ["#e25555","#f06292","#ba68c8","#64b5f6","#4db6ac","#81c784","#ffd54f"]; // pastel-like
+      const MIN_SIZE = 12;   // px
+      const MAX_SIZE = 28;   // px (mobile) – scaled a bit on large screens below
+      const MIN_DUR = 4.5;   // s
+      const MAX_DUR = 9.0;   // s
+      const SPAWN_MS = 260;  // how often a heart is spawned
 
-      // Hiển thị tên ở giữa màn hình
-      //document.getElementById("nameDisplay").textContent = hoTen;
-      document.getElementById("nameDisplay").innerHTML = `
-   <div style="font-size: 24px; margin-bottom: 10px;">HELLO BRO</div>
-  <div style="font-size: 32px; font-weight: bold;">${hoTen}</div>
-  <div style="font-size: 24px; margin-bottom: 10px;">VÀO ĐÂY CÓ VIỆC GÌ 🫵🖕</div>
-`;
+      const nameEl = document.getElementById('nameDisplay');
+      const timeEl = document.getElementById('timeNow');
+      const heartsLayer = document.getElementById('heartsLayer');
+      const changeNameBtn = document.getElementById('changeName');
 
-      // Lấy ngày giờ hiện tại
-      const ngayGio = new Date();
-      const formattedDateTime = ngayGio.toLocaleString("vi-VN", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      });
+      // Scale parameters for desktop for nicer density
+      const isDesktop = matchMedia('(pointer:fine)').matches && window.innerWidth >= 1024;
+      const sizeBoost = isDesktop ? 1.2 : 1.0;
 
-      // Gửi dữ liệu lên Google Sheets qua webhook
-      fetch(
-        "https://script.google.com/macros/s/AKfycbyUDt5uVfC60IOvWE9DuNChQzoh6-HsULx-VJ-pr6M0wzi8rL0NZQXLR9H5_AKBjJ8XrA/exec",
-        {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: `name=${encodeURIComponent(hoTen)}&time=${encodeURIComponent(
-            formattedDateTime
-          )}`,
-        }
-      );
+      // Ask for name once on first load
+      const askName = () => {
+        const input = prompt('Nhập HỌ TÊN của bạn:');
+        const safe = (input || 'Friend').toString().trim().slice(0, 64);
+        nameEl.textContent = safe;
+        sendLog(safe);
+      };
+      askName();
 
-      // Tạo trái tim bay lên
-      function createHeart() {
-        const heart = document.createElement("div");
-        heart.className = "heart";
+      // Change name on click
+      changeNameBtn.addEventListener('click', askName, {passive:true});
 
-        const colors = [
-          "#e25555",
-          "#f06292",
-          "#ba68c8",
-          "#64b5f6",
-          "#4db6ac",
-          "#81c784",
-          "#ffd54f",
-        ];
-        heart.style.backgroundColor =
-          colors[Math.floor(Math.random() * colors.length)];
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+      // Show current time (auto-updating each second)
+      const updateTime = () => {
+        const now = new Date();
+        timeEl.textContent = now.toLocaleString('vi-VN', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'});
+      };
+      updateTime();
+      setInterval(updateTime, 1000);
 
-        document.body.appendChild(heart);
-
-        setTimeout(() => {
-          heart.remove();
-        }, 5000); // phải khớp với animationDuration max
+      // Send data to Google Apps Script (best-effort; no-cors)
+      function sendLog(name){
+        try{
+          const when = new Date().toLocaleString('vi-VN', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'});
+          fetch('https://script.google.com/macros/s/AKfycbyUDt5uVfC60IOvWE9DuNChQzoh6-HsULx-VJ-pr6M0wzi8rL0NZQXLR9H5_AKBjJ8XrA/exec',{
+            method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded'},
+            body: 'name='+encodeURIComponent(name)+'&time='+encodeURIComponent(when)
+          });
+        }catch(e){/* ignore */}
       }
 
-      setInterval(createHeart, 300);
+      // Heart factory
+      function createHeart(){
+        const h = document.createElement('div');
+        h.className = 'heart';
+        const size = (Math.random()*(MAX_SIZE - MIN_SIZE) + MIN_SIZE) * sizeBoost;
+        const dur  = (Math.random()*(MAX_DUR - MIN_DUR) + MIN_DUR);
+        h.style.setProperty('--size', size + 'px');
+        h.style.setProperty('--duration', dur + 's');
+        h.style.setProperty('--color', COLORS[(Math.random()*COLORS.length)|0]);
+        // random horizontal start
+        const startLeft = Math.random()*100; // vw percent
+        h.style.left = startLeft + 'vw';
+        heartsLayer.appendChild(h);
+        // Clean up when finished
+        const rmAfter = (dur*1000) + 400; // give some buffer
+        setTimeout(()=> h.remove(), rmAfter);
+      }
+
+      // Use rAF ticker for smoother spawning & better battery
+      let lastSpawn = 0;
+      function tick(ts){
+        if(!document.hidden){
+          if(ts - lastSpawn > SPAWN_MS){
+            createHeart();
+            if(Math.random() < 0.35) createHeart(); // occasional double spawn for variety
+            lastSpawn = ts;
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      // Pause spawns when tab hidden (saves battery)
+      document.addEventListener('visibilitychange', ()=>{ lastSpawn = performance.now(); });
     </script>
   </body>
 </html>
